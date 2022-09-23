@@ -4,12 +4,12 @@ The goal of this project is to track API requests into Tinybird data pipeline, p
 
 ## Motivation
 
-This is related to the [Live Session](https://www.tinybird.co/live-coding-sessions/realtime-activity-logs) for activity logs & usage for an application.
+This is related to the [Live Session](https://www.tinybird.co/live-coding-sessions/realtime-activity-logs) for activity logs & usage for an application by Tinybird.
 
-In this case I've implemented a decorator to track server-side analytics for api calls and get response times, status codes, path & method called.
-Request & responses payloads could be added to the tracking, but for security reasons should be avoided unless ofuscated.
+In this case I've implemented a decorator to track `server-side analytics` for api calls and get response times, status codes, path & method called.  
+Request & responses payloads could be added for tracking porpouses, but for security reasons should be avoided unless ofuscated treated to avoid any GDPR conflicts.
 
-For user's UI activity is tracked using google anayltics based on Tinybird's snippet provided in the live session.
+For user's UI activity we are using Google Anayltics alternative tracking based on Tinybird's snippet provided on the live session.
 
 ## Setup
 
@@ -53,8 +53,8 @@ LIMIT {{Int32(page_size, 100)}}
 OFFSET {{Int32(page, 0) * Int32(page_size, 100)}}
 ```
 
-6. Configure the `TINYBIRD_URL` & `TINYBIRD_TOKEN` on your local environment.
-   NOTE: Even though Tinybird can configure token's per customer, you could also recover specific user's parameters (`user_id` from authentication) on `/api/requests` and provide it directly from the backend as a query parameter.
+6. Configure the `TINYBIRD_URL` & `TINYBIRD_TOKEN` on your local environment.  
+   **NOTE**: Even though Tinybird can configure token's per customer, you could also recover specific user's parameters (`user_id` from authentication) on `/api/requests` and provide it directly from the backend as a query parameter.
 
 ## Getting Started
 
