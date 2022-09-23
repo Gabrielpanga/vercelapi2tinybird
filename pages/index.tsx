@@ -3,12 +3,13 @@ import useSWR from 'swr'
 import Head from 'next/head'
 import Script from 'next/script'
 import { toast } from 'react-toastify'
+import HttpCodeBadge from '../components/HttpCodeBadge'
 
 type RequestLog = {
   date: string
   path: string
   method: string
-  status_code: string
+  status_code: number
   response_time: number
 }
 
@@ -48,30 +49,18 @@ const Home: NextPage = () => {
 
       <button
         onClick={onGenerateNewRequest}
-        type="button"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
       >
-        <svg
-          aria-hidden="true"
-          className="w-5 h-5"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-            clip-rule="evenodd"
-          ></path>
-        </svg>
-        <span className="sr-only">Generate a request</span>
+        <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+          Generate a request
+        </span>
       </button>
 
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="py-3 px-6">
-              Date
+              Date (utc)
             </th>
             <th>Path</th>
             <th>Status</th>
@@ -87,8 +76,12 @@ const Home: NextPage = () => {
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                 >
                   <td>{request.date}</td>
-                  <td>{request.path}</td>
-                  <td>{request.status_code}</td>
+                  <td>
+                    <code>{request.path}</code>
+                  </td>
+                  <td>
+                    <HttpCodeBadge code={request.status_code} />
+                  </td>
                   <td>{request.response_time}</td>
                 </tr>
               )
