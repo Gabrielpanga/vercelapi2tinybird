@@ -1,5 +1,6 @@
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
-import { userAgent, URLPattern } from 'next/server'
+import { userAgent } from 'next/server'
+import { v4 as uuidv4 } from 'uuid'
 
 import { kafkaProducer } from './kafka'
 
@@ -16,6 +17,7 @@ export function withRequestTracking(handler: NextApiHandler) {
       const headers = new Headers(req.headers as Record<string, string>)
 
       const message = {
+        id: uuidv4(),
         date: requestedAt,
         path: req.url,
         method: req.method,
