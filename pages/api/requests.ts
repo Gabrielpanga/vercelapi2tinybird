@@ -1,6 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { withRequestTracking } from '../../lib/withRequestTracking'
 import { ErrorResponse } from '../../types/api'
 
 const { TINYBIRD_TOKEN, TINYBIRD_URL } = process.env
